@@ -6,36 +6,8 @@
     <title>Sociologist's Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script>
-        function toggleMenu() {
-            var x = document.getElementById("navMenu");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPublications();
-        });
-
-        function loadPublications() {
-            var publications = [
-                { title: "Publication 1", year: "2022" },
-                { title: "Publication 2", year: "2021" },
-                // Add more publications here
-            ];
-
-            var publicationList = document.getElementById("publicationList");
-
-            publications.forEach(function(pub) {
-                var p = document.createElement("p");
-                p.innerHTML = pub.title + " - " + pub.year;
-                publicationList.appendChild(p);
-            });
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.5.1/dist/gsap.min.js"></script>
 </head>
 <body>
     <header>
@@ -47,6 +19,7 @@
                 <li><a href="#courses">Courses</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#charts">Charts</a></li>
             </ul>
         </nav>
     </header>
@@ -71,8 +44,17 @@
         <p>Contact information here.</p>
     </section>
 
+    <section id="charts">
+        <h2>Interactive 3D Chart</h2>
+        <canvas id="myChart"></canvas>
+    </section>
+
+    <div id="animationContainer"></div>
+
     <footer>
         <p>&copy; 2024 Sociologist's Name</p>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
