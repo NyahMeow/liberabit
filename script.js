@@ -10,7 +10,6 @@ function toggleMenu() {
 
 // Function to load publications dynamically
 function loadPublications() {
-    // Example publications data
     var publications = [
         { title: "Publication 1", year: "2022" },
         { title: "Publication 2", year: "2021" },
@@ -26,26 +25,42 @@ function loadPublications() {
     });
 }
 
-// Function to initialize a basic 3D scene with Three.js
+// Function to initialize a more interactive 3D chart
 function initThreeDChart() {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
-    document.getElementById('chartContainer').appendChild(renderer.domElement);
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-    // Add 3D objects here
-    var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Lighting
+    var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    var pointLight = new THREE.PointLight(0xffffff, 0.5);
+    camera.add(pointLight);
+
+    // 3D Chart Elements (Example: Bars)
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+
+    // Create multiple bars for a bar chart
+    for (var i = 0; i < 5; i++) {
+        var bar = new THREE.Mesh(geometry, material);
+        bar.position.x = i * 2 - 5;
+        bar.scale.y = Math.random() * 2 + 1; // Random height for each bar
+        scene.add(bar);
+    }
 
     camera.position.z = 5;
 
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
+
     function animate() {
         requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        controls.update();
         renderer.render(scene, camera);
     }
 
