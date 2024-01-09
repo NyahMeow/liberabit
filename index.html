@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.5.1/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
+    <!-- Include OrbitControls.js if available from a CDN or local file -->
 </head>
 <body>
     <header>
@@ -21,11 +21,11 @@
                 <li><a href="#courses">Courses</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#charts">Charts</a></li>
+                <li><a href="#threeDChart">3D Chart</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <section id="threeDChart">
         <h2>Interactive 3D Chart</h2>
         <div id="chartContainer"></div>
@@ -50,13 +50,6 @@
         <h2>Contact</h2>
         <p>Contact information here.</p>
     </section>
-
-    <section id="charts">
-        <h2>Interactive 3D Chart</h2>
-        <canvas id="myChart"></canvas>
-    </section>
-
-    <div id="animationContainer"></div>
 
     <footer>
         <p>&copy; 2024 Sociologist's Name</p>
