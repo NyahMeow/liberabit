@@ -1,3 +1,4 @@
+// Function to toggle the navigation menu
 function toggleMenu() {
     var x = document.getElementById("navMenu");
     if (x.style.display === "block") {
@@ -7,13 +8,9 @@ function toggleMenu() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadPublications();
-    initializeChart();
-    animateElement();
-});
-
+// Function to load publications dynamically
 function loadPublications() {
+    // Example publications data
     var publications = [
         { title: "Publication 1", year: "2022" },
         { title: "Publication 2", year: "2021" },
@@ -29,26 +26,34 @@ function loadPublications() {
     });
 }
 
-function initializeChart() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255,
+// Function to initialize a basic 3D scene with Three.js
+function initThreeDChart() {
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    document.getElementById('chartContainer').appendChild(renderer.domElement);
+
+    // Add 3D objects here
+    var geometry = new THREE.BoxGeometry();
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+
+    animate();
+}
+
+// Event listener to run functions after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    loadPublications();
+    initThreeDChart();
+});
