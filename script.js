@@ -1,4 +1,3 @@
-// Function to toggle the navigation menu
 function toggleMenu() {
     var x = document.getElementById("navMenu");
     if (x.style.display === "block") {
@@ -8,7 +7,6 @@ function toggleMenu() {
     }
 }
 
-// Function to load publications dynamically
 function loadPublications() {
     var publications = [
         { title: "Publication 1", year: "2022" },
@@ -25,29 +23,26 @@ function loadPublications() {
     });
 }
 
-// Function to initialize a more interactive 3D chart
 function initThreeDChart() {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    var chartContainer = document.getElementById('chartContainer');
+    renderer.setSize(chartContainer.clientWidth, chartContainer.clientHeight);
+    chartContainer.appendChild(renderer.domElement);
 
-    // Lighting
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     var pointLight = new THREE.PointLight(0xffffff, 0.5);
     camera.add(pointLight);
 
-    // 3D Chart Elements (Example: Bars)
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
 
-    // Create multiple bars for a bar chart
     for (var i = 0; i < 5; i++) {
         var bar = new THREE.Mesh(geometry, material);
         bar.position.x = i * 2 - 5;
-        bar.scale.y = Math.random() * 2 + 1; // Random height for each bar
+        bar.scale.y = Math.random() * 2 + 1;
         scene.add(bar);
     }
 
@@ -67,7 +62,6 @@ function initThreeDChart() {
     animate();
 }
 
-// Event listener to run functions after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     loadPublications();
     initThreeDChart();
